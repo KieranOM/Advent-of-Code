@@ -29,21 +29,19 @@ public class Solution : SolutionBase
 
         for (var i = 0; i < batteries; i++)
         {
-            var index = start;
-            var max = bank[index];
+            var max = (Index: start, Value: bank[start]);
             var end = bank.Count - (batteries - i - 1);
 
             for (var j = start + 1; j < end; j++)
             {
                 var battery = bank[j];
-                if (battery <= max) continue;
+                if (battery <= max.Value) continue;
 
-                max = battery;
-                index = j;
+                max = (Index: j, Value: battery);
             }
 
-            start = index + 1;
-            joltage = joltage * 10 + max;
+            start = max.Index + 1;
+            joltage = joltage * 10 + max.Value;
         }
 
         return joltage;
