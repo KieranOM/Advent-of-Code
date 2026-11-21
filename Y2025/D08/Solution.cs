@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2025.D08;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2025.D08;
 
 public class Solution : SolutionBase
 {
@@ -64,31 +66,5 @@ public class Solution : SolutionBase
     private readonly record struct Connection(Vector3L First, Vector3L Second)
     {
         public readonly long Distance = Vector3L.DistanceSquared(First, Second);
-    }
-
-    private readonly record struct Vector3L(long X, long Y, long Z)
-    {
-        public static long DistanceSquared(Vector3L left, Vector3L right)
-        {
-            var deltaX = left.X - right.X;
-            var deltaY = left.Y - right.Y;
-            var deltaZ = left.Z - right.Z;
-            return deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
-        }
-
-        public static Vector3L Parse(string input) => Parse(input.AsSpan());
-
-        public static Vector3L Parse(ReadOnlySpan<char> input)
-        {
-            var enumerator = input.Split(',');
-            Span<long> xyz = stackalloc long[3];
-            for (var i = 0; i < 3; i++)
-            {
-                enumerator.MoveNext();
-                xyz[i] = long.Parse(input[enumerator.Current].Trim());
-            }
-
-            return new Vector3L(xyz[0], xyz[1], xyz[2]);
-        }
     }
 }
