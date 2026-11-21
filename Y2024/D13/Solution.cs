@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using AoC.Toolkit.Numerics;
 
 namespace AoC.Y2024.D13;
 
@@ -75,8 +76,6 @@ public partial class Solution : SolutionBase
             return new Configuration(a, b, prize);
         }
     }
-
-    private readonly record struct Vector2I(in int X, in int Y);
 
     [GeneratedRegex(@"Button A: X\+(\d+), Y\+(\d+)$\nButton B: X\+(\d+), Y\+(\d+)$\nPrize: X=(\d+), Y=(\d+)",
         RegexOptions.Multiline)]

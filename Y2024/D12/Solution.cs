@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D12;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2024.D12;
 
 public class Solution : SolutionBase
 {
@@ -38,8 +40,8 @@ public class Solution : SolutionBase
 
     private readonly record struct Visit(in Vector2I Position, in Vector2I Forward)
     {
-        public Vector2I Left => Forward.TurnLeft();
-        public Vector2I Right => Forward.TurnRight();
+        public Vector2I Left => Forward.Skew(clockwise: false);
+        public Vector2I Right => Forward.Skew(clockwise: true);
     }
 
     private static int Sides(in Region region)
@@ -95,20 +97,6 @@ public class Solution : SolutionBase
                 grid.SetPlant(position, row[x]);
             }
         }
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static Vector2I Up => new(0, 1);
-        public static Vector2I Down => new(0, -1);
-        public static Vector2I Right => new(1, 0);
-        public static Vector2I Left => new(-1, 0);
-
-        public Vector2I TurnRight() => new(Y, -X);
-        public Vector2I TurnLeft() => new(-Y, X);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
     }
 
     private readonly record struct Region(in char Plant, in HashSet<Vector2I> Plots);

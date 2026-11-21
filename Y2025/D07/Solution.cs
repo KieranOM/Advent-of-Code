@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2025.D07;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2025.D07;
 
 public class Solution : SolutionBase
 {
@@ -58,17 +60,6 @@ public class Solution : SolutionBase
                                     CountTimelines(grid, particle + Vector2I.Right, memo);
 
         return memo[particle] = CountTimelines(grid, particle, memo);
-    }
-
-
-    private readonly record struct Vector2I(int X, int Y)
-    {
-        public static Vector2I Up { get; } = new(0, 1);
-        public static Vector2I Left { get; } = new(-1, 0);
-        public static Vector2I Right { get; } = new(1, 0);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
     }
 
     private static Grid ParseGrid(string[] inputs)

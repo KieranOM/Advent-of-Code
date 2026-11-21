@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2025.D04;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2025.D04;
 
 public class Solution : SolutionBase
 {
@@ -56,6 +58,4 @@ public class Solution : SolutionBase
 
         return rolls;
     }
-
-    private readonly record struct Vector2I(int X, int Y);
 }

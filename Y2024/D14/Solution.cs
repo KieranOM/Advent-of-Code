@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using AoC.Toolkit.Numerics;
 
 namespace AoC.Y2024.D14;
 
@@ -87,21 +88,6 @@ public partial class Solution : SolutionBase
             var wrapped = new Vector2I(Wrap(projection.X, Width), Wrap(projection.Y, Height));
             return this with { Position = wrapped };
         }
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
-
-        public static Vector2I operator *(in Vector2I vector, in int scalar) =>
-            new(vector.X * scalar, vector.Y * scalar);
-
-        public static Vector2I operator /(in Vector2I vector, in int scalar) =>
-            new(vector.X / scalar, vector.Y / scalar);
-
-        public static int ManhattanDistance(in Vector2I from, in Vector2I to) =>
-            Math.Abs(from.X - to.X) + Math.Abs(from.Y - to.X);
     }
 
     [GeneratedRegex(@"p=(\d+),(\d+) v=(-?\d+),(-?\d+)", RegexOptions.Multiline)]

@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D06;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2024.D06;
 
 public class Solution : SolutionBase
 {
@@ -29,7 +31,7 @@ public class Solution : SolutionBase
             var result = grid.Traverse(position, direction, visited, out var end);
             if (result != TraverseResult.Obstacle) return result;
 
-            direction = direction.Rotate();
+            direction = direction.Skew(clockwise: true);
             position = end;
         }
     }
@@ -66,15 +68,6 @@ public class Solution : SolutionBase
                 else if (cell == obstacle) grid.AddObstacle(position);
             }
         }
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static Vector2I Up => new(0, 1);
-        public Vector2I Rotate() => new(Y, -X);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
     }
 
     private readonly record struct Visit(in Vector2I Position, in Vector2I Direction);

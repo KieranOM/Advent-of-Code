@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using AoC.Toolkit.Numerics;
 
 namespace AoC.Y2024.D15;
 
@@ -207,20 +208,6 @@ public partial class Solution : SolutionBase
 
         public Box Move(in Vector2I direction) =>
             this with { Position = Position + direction };
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static readonly Vector2I Up = new(0, 1);
-        public static readonly Vector2I Down = new(0, -1);
-        public static readonly Vector2I Right = new(1, 0);
-        public static readonly Vector2I Left = new(-1, 0);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
-
-        public static Vector2I operator *(in Vector2I vector, in int scalar) =>
-            new(vector.X * scalar, vector.Y * scalar);
     }
 
     [GeneratedRegex(@"^#+$\n(.+$\n)+^#+$", RegexOptions.Multiline)]

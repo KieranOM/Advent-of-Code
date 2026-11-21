@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2025.D09;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2025.D09;
 
 public class Solution : SolutionBase
 {
@@ -76,24 +78,6 @@ public class Solution : SolutionBase
                     return false;
 
             return true;
-        }
-    }
-
-    public readonly record struct Vector2I(int X, int Y)
-    {
-        public static Vector2I Parse(string input) => Parse(input.AsSpan());
-
-        public static Vector2I Parse(ReadOnlySpan<char> input)
-        {
-            var enumerator = input.Split(',');
-            Span<int> xy = stackalloc int[3];
-            for (var i = 0; i < 3; i++)
-            {
-                enumerator.MoveNext();
-                xy[i] = int.Parse(input[enumerator.Current].Trim());
-            }
-
-            return new Vector2I(xy[0], xy[1]);
         }
     }
 }

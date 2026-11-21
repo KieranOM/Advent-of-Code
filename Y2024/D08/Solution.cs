@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D08;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2024.D08;
 
 public class Solution : SolutionBase
 {
@@ -75,15 +77,6 @@ public class Solution : SolutionBase
     private static bool IsAntenna(in char cell)
     {
         return cell is >= 'a' and <= 'z' or >= 'A' and <= 'Z' or >= '0' and <= '9';
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
-
-        public static Vector2I operator -(in Vector2I left, in Vector2I right) =>
-            new(left.X - right.X, left.Y - right.Y);
     }
 
     private class Grid(int width, int height)

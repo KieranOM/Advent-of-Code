@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D18;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2024.D18;
 
 public class Solution : SolutionBase
 {
@@ -42,37 +44,6 @@ public class Solution : SolutionBase
         var fallen = Vector2I.Parse(input[index]);
         grid.AddObstacle(fallen);
         return fallen;
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        private static Vector2I Up => new(0, 1);
-        private static Vector2I Down => new(0, -1);
-        private static Vector2I Left => new(-1, 0);
-        private static Vector2I Right => new(1, 0);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
-
-        public static Vector2I operator -(in Vector2I left, in Vector2I right) =>
-            new(left.X - right.X, left.Y - right.Y);
-
-        public static Vector2I Parse(in ReadOnlySpan<char> input)
-        {
-            const char separator = ',';
-            int index = input.IndexOf(separator);
-            int x = int.Parse(input[..index]);
-            int y = int.Parse(input[(index + 1)..]);
-            return new Vector2I(x, y);
-        }
-
-        public IEnumerable<Vector2I> Adjacent()
-        {
-            yield return this + Up;
-            yield return this + Down;
-            yield return this + Left;
-            yield return this + Right;
-        }
     }
 
     private class Grid(int width, int height)
@@ -139,8 +110,7 @@ public class Solution : SolutionBase
 
         private static int Heuristic(in Vector2I from, in Vector2I to)
         {
-            var delta = from - to;
-            return Math.Abs(delta.X) + Math.Abs(delta.Y);
+            return Vector2I.ManhattanDistance(from, to);
         }
 
         private static List<Vector2I> BuildTraversal(Vector2I current, Dictionary<Vector2I, Vector2I> history)

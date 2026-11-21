@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D16;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2024.D16;
 
 public class Solution : SolutionBase
 {
@@ -77,8 +79,8 @@ public class Solution : SolutionBase
         public Traversal Step() => new(Score + 1, Transform with { Position = Transform.Forward },
             [..Path, Transform.Forward]);
 
-        public Traversal Left() => Turn(Transform.Direction.Anticlockwise());
-        public Traversal Right() => Turn(Transform.Direction.Clockwise());
+        public Traversal Left() => Turn(Transform.Direction.Skew(clockwise: false));
+        public Traversal Right() => Turn(Transform.Direction.Skew(clockwise: true));
 
         private Traversal Turn(in Vector2I direction) =>
             new(Score + 1000, Transform with { Direction = direction }, Path);
@@ -86,23 +88,9 @@ public class Solution : SolutionBase
 
     private readonly record struct Transform2I(Vector2I Position, Vector2I Direction)
     {
-        public Vector2I Left => Position + Direction.Anticlockwise();
-        public Vector2I Right => Position + Direction.Clockwise();
+        public Vector2I Left => Position + Direction.Skew(clockwise: false);
+        public Vector2I Right => Position + Direction.Skew(clockwise: true);
         public Vector2I Forward => Position + Direction;
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static readonly Vector2I Up = new(0, 1);
-        public static readonly Vector2I Down = new(0, -1);
-        public static readonly Vector2I Right = new(1, 0);
-        public static readonly Vector2I Left = new(-1, 0);
-
-        public Vector2I Clockwise() => new(-Y, X);
-        public Vector2I Anticlockwise() => new(Y, -X);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
     }
 
     private static Maze ParseMaze(in string[] input)

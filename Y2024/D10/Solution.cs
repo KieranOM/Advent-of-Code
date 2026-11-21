@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D10;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2024.D10;
 
 public class Solution : SolutionBase
 {
@@ -35,17 +37,6 @@ public class Solution : SolutionBase
                 grid.SetAltitude(position, altitude);
             }
         }
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static Vector2I Up => new(0, 1);
-        public static Vector2I Down => new(0, -1);
-        public static Vector2I Right => new(1, 0);
-        public static Vector2I Left => new(-1, 0);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
     }
 
     private class Grid(int width, int height)

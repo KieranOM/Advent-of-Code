@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D20;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2024.D20;
 
 public class Solution : SolutionBase
 {
@@ -50,7 +52,7 @@ public class Solution : SolutionBase
         {
             for (var end = start + 1; end < path.Count; ++end)
             {
-                var distance = Distance(path[start], path[end]);
+                var distance = Vector2I.ManhattanDistance(path[start], path[end]);
                 if (distance <= count)
                 {
                     var cheat = start + distance;
@@ -65,30 +67,6 @@ public class Solution : SolutionBase
         }
 
         return cheats;
-    }
-
-    private static int Distance(in Vector2I start, in Vector2I end)
-    {
-        return Math.Abs(end.X - start.X) + Math.Abs(end.Y - start.Y);
-    }
-
-    private readonly record struct Vector2I(in int X, in int Y)
-    {
-        public static Vector2I Up => new(0, 1);
-        public static Vector2I Down => new(0, -1);
-        public static Vector2I Right => new(1, 0);
-        public static Vector2I Left => new(-1, 0);
-
-        public static Vector2I operator +(in Vector2I left, in Vector2I right) =>
-            new(left.X + right.X, left.Y + right.Y);
-
-        public IEnumerable<Vector2I> Adjacent()
-        {
-            yield return this + Up;
-            yield return this + Down;
-            yield return this + Right;
-            yield return this + Left;
-        }
     }
 
     private static void ParseInput(in string[] input, out HashSet<Vector2I> tracks, out Vector2I start,
