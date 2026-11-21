@@ -1,4 +1,4 @@
-﻿namespace AoC.Y2025.D08;
+﻿namespace AoC.Toolkit.Collections;
 
 public class DisjointSet<T> where T : IEquatable<T>
 {
@@ -14,10 +14,12 @@ public class DisjointSet<T> where T : IEquatable<T>
             MakeSet(item);
     }
 
-    public int PartitionCount { get; private set; } = 0;
+    public int ElementCount => _partitions.Count;
+    public int PartitionCount { get; private set; }
+
     public IEnumerable<HashSet<T>> Partitions => _partitions.Values.Distinct();
 
-    private void MakeSet(T item)
+    public void MakeSet(T item)
     {
         _partitions[item] = [item];
         PartitionCount++;

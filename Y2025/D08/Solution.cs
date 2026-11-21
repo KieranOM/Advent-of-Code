@@ -1,4 +1,5 @@
-﻿using AoC.Toolkit.Numerics;
+﻿using AoC.Toolkit.Collections;
+using AoC.Toolkit.Numerics;
 
 namespace AoC.Y2025.D08;
 
