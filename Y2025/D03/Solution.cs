@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2025.D03;
+﻿using AoC.Toolkit.Extensions;
+
+namespace AoC.Y2025.D03;
 
 public class Solution : SolutionBase
 {
@@ -47,5 +49,5 @@ public class Solution : SolutionBase
         return joltage;
     }
 
-    private static long ToLong(char value) => value - '0';
+    private static long ToLong(char value) => value.ToDigit();
 }

@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2024.D09;
+﻿using AoC.Toolkit.Extensions;
+
+namespace AoC.Y2024.D09;
 
 public class Solution : SolutionBase
 {
@@ -101,7 +103,7 @@ public class Solution : SolutionBase
         for (int i = 0; i < input.Length; i++)
         {
             bool isFile = i % 2 == 0;
-            int blocks = input[i] - '0';
+            int blocks = input[i].ToDigit();
             int? id = isFile
                 ? i / 2
                 : null;

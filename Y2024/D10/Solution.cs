@@ -1,4 +1,5 @@
-﻿using AoC.Toolkit.Numerics;
+﻿using AoC.Toolkit.Extensions;
+using AoC.Toolkit.Numerics;
 
 namespace AoC.Y2024.D10;
 
@@ -32,7 +33,7 @@ public class Solution : SolutionBase
             string row = input[invert - y];
             for (int x = 0; x < width; x++)
             {
-                int altitude = row[x] - '0';
+                int altitude = row[x].ToDigit();
                 var position = new Vector2I(x, y);
                 grid.SetAltitude(position, altitude);
             }

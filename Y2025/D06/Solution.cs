@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2025.D06;
+﻿using AoC.Toolkit.Extensions;
+
+namespace AoC.Y2025.D06;
 
 public class Solution : SolutionBase
 {
@@ -57,7 +59,7 @@ public class Solution : SolutionBase
             {
                 if (char.IsWhiteSpace(worksheet[row][column])) continue;
 
-                var digit = worksheet[row][column] - '0';
+                var digit = worksheet[row][column].ToDigit();
                 operand = operand * 10 + digit;
             }
 
