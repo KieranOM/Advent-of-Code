@@ -1,4 +1,6 @@
-﻿namespace AoC.Y2025.D10;
+﻿using AoC.Toolkit.Numerics;
+
+namespace AoC.Y2025.D10;
 
 public class Machine(List<int> lights, List<List<int>> buttons, List<int> joltages)
 {
@@ -19,7 +21,7 @@ public class Machine(List<int> lights, List<List<int>> buttons, List<int> joltag
         {
             foreach (var row in Buttons[column])
             {
-                matrix[row, column] = 1.0;
+                matrix[row, column] = Fraction.One;
             }
         }
 

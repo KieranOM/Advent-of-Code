@@ -70,7 +70,7 @@ public class Solution : SolutionBase
         var solution = matrix.Columns - 1;
         for (var row = 0; row < matrix.Rows; row++)
         {
-            if (matrix[row, variable] == 0.0d) continue;
+            if (matrix[row, variable].IsZero()) continue;
 
             min = Math.Min(min, (int)matrix[row, solution]);
         }

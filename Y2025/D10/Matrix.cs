@@ -1,13 +1,26 @@
-﻿namespace AoC.Y2025.D10;
+﻿using AoC.Toolkit.Numerics;
 
-public class Matrix(int rows, int columns)
+namespace AoC.Y2025.D10;
+
+public class Matrix
 {
-    public int Rows => rows;
-    public int Columns => columns;
+    public int Rows { get; }
+    public int Columns { get; }
 
-    private readonly double[,] _matrix = new double[rows, columns];
+    private readonly Fraction[,] _matrix;
 
-    public double this[int i, int j]
+    public Matrix(int rows, int columns)
+    {
+        Rows = rows;
+        Columns = columns;
+        _matrix = new Fraction[rows, columns];
+
+        for (var r = 0; r < rows; r++)
+        for (var c = 0; c < columns; c++)
+            _matrix[r, c] = Fraction.Zero;
+    }
+
+    public Fraction this[int i, int j]
     {
         get => _matrix[i, j];
         set => _matrix[i, j] = value;

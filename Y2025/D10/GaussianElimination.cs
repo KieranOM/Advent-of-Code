@@ -2,14 +2,6 @@
 
 public static class GaussianElimination
 {
-    private static class Approximately
-    {
-        private const double Accuracy = 1e-10;
-        public static bool AreEqual(double value, double other) => IsZero(value - other);
-        public static bool IsZero(double value) => Math.Abs(value) <= Accuracy;
-        public static bool IsNegative(double value) => value < -Accuracy;
-    }
-
     public static void Run(Matrix matrix, out List<int> dependents, out List<int> independents)
     {
         dependents = [];
@@ -43,7 +35,7 @@ public static class GaussianElimination
     {
         for (var r = startRow; r < matrix.Rows; r++)
         {
-            if (Approximately.IsZero(matrix[r, column])) continue;
+            if (matrix[r, column].IsZero()) continue;
 
             pivot = r;
             return true;
@@ -97,18 +89,18 @@ public static class GaussianElimination
                 sum -= matrix[row, independents[i]] * assignments[i];
             }
 
-            if (Approximately.IsNegative(sum))
+            if (sum.IsNegative())
             {
                 return false;
             }
 
-            var rounded = (int)Math.Round(sum);
-            if (Approximately.AreEqual(sum, rounded) == false)
+            if (sum.IsWhole() == false)
             {
                 return false;
             }
 
-            total += rounded;
+            sum = sum.Simplified();
+            total += sum.Numerator;
         }
 
         return true;
